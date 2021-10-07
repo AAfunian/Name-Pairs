@@ -11,8 +11,9 @@ private:
 public:
     void read_names();
     void read_ages();
-    void print();
     void sort();
+    vector<string> getNames() { return name; }
+    vector<double> getAges() { return age; }
 };
 // Read names through input stream
 void Name_pairs::read_names() {
@@ -50,11 +51,12 @@ void Name_pairs::read_ages() {
         age.push_back(temp);
     }
 }
-// Print a name the corresponding age per line
-void Name_pairs::print() {
-    for (int i = 0; i < name.size(); ++i) {
-        cout << "Name: " << name[i] << ", Age: " << age[i] << '\n';
+// Overload the << operator for use on Name_pairs class
+ostream& operator<<(ostream& os, Name_pairs n) {
+    for (int i = 0; i < n.getNames().size(); ++i) {
+        cout << "Name: " << n.getNames()[i] << ", Age: " << n.getAges()[i] << '\n';
     }
+    return os << '\n';
 }
 // Sort name vector alphabetically (assumes correct name case)
 void Name_pairs::sort() {
@@ -81,5 +83,5 @@ int main()
     test.read_names();
     test.read_ages();
     test.sort();
-    test.print();
+    cout << test;
 }
