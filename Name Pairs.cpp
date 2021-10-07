@@ -51,12 +51,48 @@ void Name_pairs::read_ages() {
         age.push_back(temp);
     }
 }
-// Overload the << operator for use on Name_pairs class
+// Overload the << operator for use on Name_pairs objects
 ostream& operator<<(ostream& os, Name_pairs n) {
     for (int i = 0; i < n.getNames().size(); ++i) {
         cout << "Name: " << n.getNames()[i] << ", Age: " << n.getAges()[i] << '\n';
     }
     return os << '\n';
+}
+// Overload the == operator for use on Name_pairs objects
+bool operator==(Name_pairs x, Name_pairs y) {
+    if (x.getNames().size() == y.getNames().size()) {
+        for (int i = 0; i < x.getNames().size(); ++i) {
+            if (x.getNames()[i] == y.getNames()[i] && x.getAges()[i] == y.getAges()[i]) {}
+            else { 
+                cout << "Not equal!\n";
+                return false;
+            }
+        }
+    }
+    else {
+        cout << "Not equal!\n";
+        return false;
+    }
+    cout << "Equal!\n";
+    return true;
+}
+// Overload the != operator for use on Name_pairs objects
+bool operator!=(Name_pairs x, Name_pairs y) {
+    if (x.getNames().size() == y.getNames().size()) {
+        for (int i = 0; i < x.getNames().size(); ++i) {
+            if (x.getNames()[i] == y.getNames()[i] && x.getAges()[i] == y.getAges()[i]) {}
+            else {
+                cout << "Not equal!\n";
+                return true;
+            }
+        }
+    }
+    else {
+        cout << "Not equal!\n";
+        return true;
+    }
+    cout << "Equal!\n";
+    return false;
 }
 // Sort name vector alphabetically (assumes correct name case)
 void Name_pairs::sort() {
@@ -79,9 +115,16 @@ void Name_pairs::sort() {
 
 int main()
 {
-    Name_pairs test;
-    test.read_names();
-    test.read_ages();
-    test.sort();
-    cout << test;
+    Name_pairs test1;
+    Name_pairs test2;
+    test1.read_names();
+    test1.read_ages();
+    test1.sort();
+    test2.read_names();
+    test2.read_ages();
+    test2.sort();
+    cout << test1 << test2;
+    test1 == test2;
+    test1 != test2;
+    return 0;
 }
